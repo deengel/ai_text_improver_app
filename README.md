@@ -25,6 +25,10 @@ This app is licensed under the MIT License. You can view, modify, and use the so
 ## Gallery
 
 <p float="left">
-    <img src="images/Screenshot_enterText.png" alt="Enter text" width="250" />
-    <img src="images/Screenshot_result.png" alt="Result" width="250" />
+    <kbd><img src="images/0.png" width="250" /></kbd>
+    <kbd><img src="images/1.png" width="250" /></kbd>
+    <kbd><img src="images/2.png" width="250" /></kbd>
+    <kbd><img src="images/3.png" width="250" /></kbd>
+    <kbd><img src="images/4.png" width="250" /></kbd>
+    <kbd><img src="images/5.png" width="250" /></kbd>
 </p>

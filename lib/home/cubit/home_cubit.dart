@@ -114,16 +114,19 @@ class HomeCubit extends Cubit<HomeState> {
       tones.add('assertive');
     }
 
+    AnswerLength answerLength = AnswerLength.same;
+
     if (expandValue < lowerThreshold) {
-      tones.add('shorten');
+      answerLength = AnswerLength.shorten;
     } else if (expandValue > upperThreshold) {
-      tones.add('expand');
+      answerLength = AnswerLength.expand;
     }
 
     try {
       await _gptRepository.sendRequest(
         apiKey: state.apiKey,
         inputText: inputText,
+        answerLength: answerLength,
         tones: tones,
       );
     } catch (e) {
