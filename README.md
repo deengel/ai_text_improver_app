@@ -1,6 +1,6 @@
-<img src="images/animation.gif" width="150" />
-
 # AI Text Improver
+
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields)](http://makeapullrequest.com)
 
 > An AI-based text improvement tool built in Flutter, powered by GPT.
 

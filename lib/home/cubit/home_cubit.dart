@@ -13,9 +13,9 @@ class HomeState extends Equatable {
 
   const HomeState({
     this.status = HomeStatus.initial,
-    this.resultText = "",
-    this.errorText = "",
-    this.apiKey = "",
+    this.resultText = '',
+    this.errorText = '',
+    this.apiKey = '',
   });
 
   HomeState copyWith({
@@ -89,8 +89,8 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
-  Future<void> paraphrase({
-    required String inputText,
+  Future<void> improve({
+    required String userMessage,
     required double formalValue,
     required double assertiveValue,
     required double expandValue,
@@ -125,7 +125,7 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await _gptRepository.sendRequest(
         apiKey: state.apiKey,
-        inputText: inputText,
+        userMessage: userMessage,
         answerLength: answerLength,
         tones: tones,
       );
@@ -134,10 +134,18 @@ class HomeCubit extends Cubit<HomeState> {
         state.copyWith(
           status: HomeStatus.success,
           resultText: '',
-          errorText: 'Failed to paraphrase. Error:\n$e',
+          errorText: 'Failed to improve. Error:\n$e',
         ),
       );
     }
+  }
+
+  void reset() {
+    emit(state.copyWith(
+      status: HomeStatus.success,
+      resultText: '',
+      errorText: '',
+    ));
   }
 
   void setApiKey(String apiKey) => _settingsRepository.setApiKey(apiKey);

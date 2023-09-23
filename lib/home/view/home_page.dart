@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                      content: Text('Please enter some text to paraphrase'),
+                      content: Text('Please enter some text to improve.'),
                       behavior: SnackBarBehavior.floating,
                     ),
                   );
@@ -117,15 +117,15 @@ class _HomePageState extends State<HomePage> {
                 }
 
                 FocusScope.of(context).unfocus();
-                context.read<HomeCubit>().paraphrase(
-                      inputText: _textController.text,
+                context.read<HomeCubit>().improve(
+                      userMessage: _textController.text,
                       formalValue: _slider1Value,
                       assertiveValue: _slider2Value,
                       expandValue: _slider3Value,
                     );
               },
               child: const Text(
-                'Paraphrase',
+                'Improve!',
                 style: TextStyle(fontSize: 14, color: Colors.white),
               ),
             ),
@@ -139,6 +139,18 @@ class _HomePageState extends State<HomePage> {
     return AppBar(
       title: const Text('AI Text Improver'),
       actions: [
+        IconButton(
+            onPressed: () {
+              _textController.text = '';
+              FocusScope.of(context).unfocus();
+
+              _slider1Value = 0.5;
+              _slider2Value = 0.5;
+              _slider3Value = 0.5;
+
+              context.read<HomeCubit>().reset();
+            },
+            icon: const Icon(Icons.refresh)),
         PopupMenuButton<SampleItem>(
           onSelected: (value) {
             switch (value) {
@@ -236,7 +248,8 @@ class _HomePageState extends State<HomePage> {
             borderSide: BorderSide(color: Colors.grey[300]!, width: 4),
             borderRadius: BorderRadius.circular(5),
           ),
-          labelText: 'Enter your text here',
+          hintText: 'Enter text in any language. Feel free to use any formatting.',
+          hintStyle: const TextStyle(fontSize: 14, color: Colors.grey),
           floatingLabelAlignment: FloatingLabelAlignment.start,
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Colors.purple, width: 2),
