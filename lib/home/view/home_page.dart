@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/services.dart';
 import 'package:ai_text_improver_app/home/home.dart';
 import 'package:ai_text_improver_app/widgets/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 enum SampleItem { enterApiKey, about }
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _scaffold(BuildContext context, HomeState state) {
-    var size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: _appBar(context, state),
@@ -149,10 +149,8 @@ class _HomePageState extends State<HomePage> {
             switch (value) {
               case SampleItem.enterApiKey:
                 _showTextInputDialog(context, state);
-                break;
               case SampleItem.about:
                 _showAboutDialog(context, state);
-                break;
             }
           },
           itemBuilder: (BuildContext context) => [
@@ -207,7 +205,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _showAboutDialog(BuildContext context, HomeState state) async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
     if (!mounted) return;
 
@@ -254,16 +252,13 @@ class _HomePageState extends State<HomePage> {
 
   Widget _resultCard(Size size, String text) {
     return Container(
-      padding: const EdgeInsets.only(top: 12.0, left: 12.0, right: 12.0, bottom: 0),
+      padding: const EdgeInsets.only(top: 12.0, left: 12.0, right: 12.0),
       alignment: Alignment.topLeft,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
           Radius.circular(5),
         ),
-        border: Border.all(
-          color: Colors.purple,
-          width: 1,
-        ),
+        border: Border.all(color: Colors.purple),
         color: Colors.purple.withOpacity(0.15),
       ),
       child: SingleChildScrollView(
@@ -297,7 +292,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

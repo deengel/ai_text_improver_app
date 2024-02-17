@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'package:ai_text_improver_app/data/repositories/repositories.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ai_text_improver_app/data/repositories/repositories.dart';
 
 enum HomeStatus { initial, loading, success, failure }
 
@@ -72,7 +72,6 @@ class HomeCubit extends Cubit<HomeState> {
       switch (setting.name) {
         case SettingName.apiKey:
           emit(state.copyWith(apiKey: setting.stringValue));
-          break;
         default:
           throw Exception('Unknown setting name: ${setting.name}');
       }
@@ -97,7 +96,7 @@ class HomeCubit extends Cubit<HomeState> {
   }) async {
     emit(state.copyWith(status: HomeStatus.loading));
 
-    List<String> tones = [];
+    final List<String> tones = [];
 
     const double lowerThreshold = 0.3;
     const double upperThreshold = 0.7;
@@ -141,11 +140,13 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void reset() {
-    emit(state.copyWith(
-      status: HomeStatus.success,
-      resultText: '',
-      errorText: '',
-    ));
+    emit(
+      state.copyWith(
+        status: HomeStatus.success,
+        resultText: '',
+        errorText: '',
+      ),
+    );
   }
 
   void setApiKey(String apiKey) => _settingsRepository.setApiKey(apiKey);

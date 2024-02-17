@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 - Adjusted the API request to match the new format in chat_gpt_sdk package.
 - The app now uses Material 3 design.
+- Fixed linting issues.
 
 ## [1.2.0] - 2023-09-23
 

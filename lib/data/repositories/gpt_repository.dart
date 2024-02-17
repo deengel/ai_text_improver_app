@@ -35,7 +35,7 @@ Step 2 - Paraphrase and improve the English version from Step 1 ${_handleTones(t
 I want you to only reply the improvements from Step 2 and nothing else, do not write explanations.
 ''';
 
-    String response = await chatCompleteWithSSE(
+    final response = await chatCompleteWithSSE(
       systemMessage: systemMessage,
       userMessage: userMessage,
     );
@@ -53,7 +53,7 @@ I want you to only reply the improvements from Step 2 and nothing else, do not w
       model: GptTurboChatModel(),
     );
 
-    ChatCTResponse? response = await openAI.onChatCompletion(request: request);
+    final ChatCTResponse? response = await openAI.onChatCompletion(request: request);
     if (response == null) return 'Failed to retrieve answer. Please try again.';
     return response.choices.last.message!.content;
   }
