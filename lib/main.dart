@@ -19,7 +19,7 @@ void main() {
 }
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +30,8 @@ class App extends StatelessWidget {
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) => MaterialApp(
           theme: ThemeData(
-            useMaterial3: true,
-            scaffoldBackgroundColor: Colors.white,
-            bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white),
+            brightness: Brightness.light,
+            colorSchemeSeed: Colors.grey,
           ),
           debugShowCheckedModeBanner: false,
           title: 'AI Text Improver',

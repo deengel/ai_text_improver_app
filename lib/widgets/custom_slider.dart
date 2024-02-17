@@ -13,8 +13,8 @@ class CustomSlider extends StatelessWidget {
     required this.value,
     required this.color,
     this.onChanged,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

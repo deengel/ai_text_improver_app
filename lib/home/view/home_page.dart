@@ -86,13 +86,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.purple,
-                elevation: 0,
-                shadowColor: Colors.transparent,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              ),
+            FilledButton(
               onPressed: () {
                 if (state.apiKey.trim().isEmpty) {
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -124,10 +118,7 @@ class _HomePageState extends State<HomePage> {
                       expandValue: _slider3Value,
                     );
               },
-              child: const Text(
-                'Improve!',
-                style: TextStyle(fontSize: 14, color: Colors.white),
-              ),
+              child: const Text('Improve!'),
             ),
           ],
         ),
@@ -140,17 +131,19 @@ class _HomePageState extends State<HomePage> {
       title: const Text('AI Text Improver'),
       actions: [
         IconButton(
-            onPressed: () {
-              _textController.text = '';
-              FocusScope.of(context).unfocus();
+          onPressed: () {
+            _textController.text = '';
+            FocusScope.of(context).unfocus();
 
-              _slider1Value = 0.5;
-              _slider2Value = 0.5;
-              _slider3Value = 0.5;
+            _slider1Value = 0.5;
+            _slider2Value = 0.5;
+            _slider3Value = 0.5;
 
-              context.read<HomeCubit>().reset();
-            },
-            icon: const Icon(Icons.refresh)),
+            context.read<HomeCubit>().reset();
+          },
+          tooltip: 'Clear text and reset sliders',
+          icon: const Icon(Icons.clear),
+        ),
         PopupMenuButton<SampleItem>(
           onSelected: (value) {
             switch (value) {
@@ -234,40 +227,29 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _inputCard(Size size) {
-    return Stack(children: [
-      TextField(
-        controller: _textController,
-        maxLines: 6,
-        maxLength: 2000,
-        textInputAction: TextInputAction.newline,
-        keyboardType: TextInputType.multiline,
-        style: const TextStyle(fontSize: 14),
-        decoration: InputDecoration(
-          alignLabelWithHint: true,
-          border: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey[300]!, width: 4),
-            borderRadius: BorderRadius.circular(5),
-          ),
-          hintText: 'Enter text in any language. Feel free to use any formatting.',
-          hintStyle: const TextStyle(fontSize: 14, color: Colors.grey),
-          floatingLabelAlignment: FloatingLabelAlignment.start,
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.purple, width: 2),
-            borderRadius: BorderRadius.circular(5),
-          ),
-          contentPadding: const EdgeInsets.all(12),
+    return TextField(
+      controller: _textController,
+      maxLines: 6,
+      maxLength: 2000,
+      textInputAction: TextInputAction.newline,
+      keyboardType: TextInputType.multiline,
+      style: const TextStyle(fontSize: 14),
+      decoration: InputDecoration(
+        alignLabelWithHint: true,
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey[300]!, width: 4),
+          borderRadius: BorderRadius.circular(5),
         ),
+        hintText: 'Enter text in any language. Feel free to use any formatting.',
+        hintStyle: const TextStyle(fontSize: 14, color: Colors.grey),
+        floatingLabelAlignment: FloatingLabelAlignment.start,
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.purple, width: 2),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        contentPadding: const EdgeInsets.all(12),
       ),
-      Align(
-        alignment: Alignment.topRight,
-        child: IconButton(
-            onPressed: () {
-              _textController.text = '';
-              FocusScope.of(context).unfocus();
-            },
-            icon: const Icon(Icons.clear)),
-      ),
-    ]);
+    );
   }
 
   Widget _resultCard(Size size, String text) {
@@ -325,7 +307,7 @@ class _HomePageState extends State<HomePage> {
   Widget _errorCard(Size size, String text) {
     return Text(
       text,
-      style: const TextStyle(color: Colors.red, fontSize: 14),
+      style: TextStyle(color: Theme.of(context).colorScheme.error),
     );
   }
 

@@ -46,16 +46,10 @@ I want you to only reply the improvements from Step 2 and nothing else, do not w
   Future<String> chatCompleteWithSSE({required String systemMessage, required String userMessage}) async {
     final request = ChatCompleteText(
       messages: [
-        Messages(
-          role: Role.system,
-          content: systemMessage,
-        ),
-        Messages(
-          role: Role.user,
-          content: userMessage,
-        ),
+        Map.of({"role": "system", "content": systemMessage}),
+        Map.of({"role": "user", "content": userMessage}),
       ],
-      maxToken: 200,
+      maxToken: 1000,
       model: GptTurboChatModel(),
     );
 
